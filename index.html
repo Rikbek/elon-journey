@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELON: The Journey — A Digital Book</title>
+  <meta name="description" content="The complete chronological story of Elon Musk — from Pretoria to the stars. 10 chapters. Built for a generation that dares." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-soft: #16161f;
+      --border: #2a2a3a;
+      --text: #e8e6e3;
+      --text-muted: #9a9690;
+      --accent: #c9a227;
+      --accent-soft: rgba(201, 162, 39, 0.15);
+      --accent-glow: rgba(201, 162, 39, 0.35);
+      --chapter-num: #6b6560;
+      --success: #3d8b6e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER / HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.5rem 4rem;
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(201, 162, 39, 0.12), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(80, 60, 120, 0.08), transparent),
+        var(--bg);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.15), transparent),
+        radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.1), transparent),
+        radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,0.12), transparent),
+        radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,0.08), transparent),
+        radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,0.1), transparent);
+      pointer-events: none;
+    }
+
+    .ca-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+      max-width: 640px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ca-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .ca-address {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.85rem;
+      color: var(--text);
+      word-break: break-all;
+      background: var(--bg-soft);
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .ca-address span {
+      flex: 1;
+      text-align: left;
+    }
+
+    .copy-btn {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .disclaimer {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      text-align: left;
+    }
+
+    .disclaimer strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .book-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.8rem, 8vw, 5.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+      font-style: italic;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .scroll-hint {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    .scroll-hint svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(4px); }
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 0.4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      min-width: max-content;
+    }
+
+    .nav a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.45rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .book {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .chapter {
+      margin-bottom: 5rem;
+      scroll-margin-top: 4.5rem;
+    }
+
+    .chapter-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .chapter-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .chapter-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .chapter-years {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .chapter-body p {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .chapter-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      margin: 1.75rem 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .highlight strong {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    /* ===== TOC ===== */
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 1.75rem;
+      margin-bottom: 4rem;
+    }
+
+    .toc h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+      color: var(--accent);
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+    }
+
+    .toc li {
+      counter-increment: toc;
+      margin-bottom: 0.65rem;
+    }
+
+    .toc a {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      padding: 0.4rem 0.5rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .toc a:hover {
+      background: var(--accent-soft);
+    }
+
+    .toc a::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      min-width: 1.6rem;
+    }
+
+    .toc-title {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+
+    .toc-years {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      background: var(--bg-card);
+    }
+
+    .footer-quote {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      max-width: 560px;
+      margin: 0 auto 1.5rem;
+      color: var(--text);
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .footer-note a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .ca-address {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+      }
+      .copy-btn {
+        text-align: center;
+      }
+      .book {
+        padding: 2rem 1.15rem 4rem;
+      }
+      .chapter {
+        margin-bottom: 3.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HERO ==================== -->
+  <header class="hero">
+    <div class="ca-box">
+      <div class="ca-label">Contract Address (CA)</div>
+      <div class="ca-address">
+        <span id="caText">COMING SOON — Paste your Solana / ETH CA here</span>
+        <button class="copy-btn" onclick="copyCA()">COPY</button>
+      </div>
+      <p class="disclaimer">
+        <strong>Disclaimer:</strong> This token was created with the sincere hope that this digital book can travel the world and become a source of motivation for Gen Z and every generation that comes after. The story of Elon Musk is not just history — it is proof that one human, starting from almost nothing, can reshape the future. May this book inspire the next builders, dreamers, and explorers.
+      </p>
+    </div>
+
+    <div class="book-badge">A Digital Book · 10 Chapters</div>
+    <h1>ELON<span>.</span> The Journey</h1>
+    <p class="hero-sub">From a quiet boy in Pretoria to the first trillionaire — the complete chronological story of the man who refuses to accept limits.</p>
+
+    <div class="scroll-hint">
+      <span>Begin the story</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ==================== NAV ==================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#toc">Contents</a>
+      <a href="#ch1">Ch.1</a>
+      <a href="#ch2">Ch.2</a>
+      <a href="#ch3">Ch.3</a>
+      <a href="#ch4">Ch.4</a>
+      <a href="#ch5">Ch.5</a>
+      <a href="#ch6">Ch.6</a>
+      <a href="#ch7">Ch.7</a>
+      <a href="#ch8">Ch.8</a>
+      <a href="#ch9">Ch.9</a>
+      <a href="#ch10">Ch.10</a>
+    </div>
+  </nav>
+
+  <!-- ==================== BOOK ==================== -->
+  <main class="book">
+
+    <!-- TABLE OF CONTENTS -->
+    <section class="toc" id="toc">
+      <h2>Table of Contents</h2>
+      <ol>
+        <li><a href="#ch1"><span class="toc-title">A Mind of His Own</span><span class="toc-years">1971–1988</span></a></li>
+        <li><a href="#ch2"><span class="toc-title">Escape Velocity</span><span class="toc-years">1989–1995</span></a></li>
+        <li><a href="#ch3"><span class="toc-title">Zip2 — The First Empire</span><span class="toc-years">1995–1999</span></a></li>
+        <li><a href="#ch4"><span class="toc-title">X.com to PayPal</span><span class="toc-years">1999–2002</span></a></li>
+        <li><a href="#ch5"><span class="toc-title">SpaceX Is Born</span><span class="toc-years">2002–2008</span></a></li>
+        <li><a href="#ch6"><span class="toc-title">Tesla Awakens</span><span class="toc-years">2004–2012</span></a></li>
+        <li><a href="#ch7"><span class="toc-title">Reusable Rockets &amp; New Frontiers</span><span class="toc-years">2012–2018</span></a></li>
+        <li><a href="#ch8"><span class="toc-title">Scaling the Impossible</span><span class="toc-years">2018–2022</span></a></li>
+        <li><a href="#ch9"><span class="toc-title">The X Era &amp; Artificial Intelligence</span><span class="toc-years">2022–2024</span></a></li>
+        <li><a href="#ch10"><span class="toc-title">Trillionaire &amp; Beyond</span><span class="toc-years">2025–Present</span></a></li>
+      </ol>
+    </section>
+
+    <!-- CHAPTER 1 -->
+    <article class="chapter" id="ch1">
+      <header class="chapter-header">
+        <div class="chapter-num">Chapter 01</div>
+        <h2 class="chapter-title">A Mind of His Own</h2>
+        <div class="chapter-years">Pretoria, South Africa · 1971–1988</div>
+      </header>
+      <div class="chapter-body">
+        <p>Elon Reeve Musk was born on June 28, 1971, in Pretoria, South Africa, to Maye Musk — a Canadian-born model and dietitian — and Errol Musk, a South African electromechanical engineer and property developer. From the earliest years, he was different. While other children played outside, Elon disappeared into books and daydreams. He would later describe himself as a quiet, intense child who preferred the company of encyclopedias and science-fiction novels.</p>
+        <p>His parents divorced when he was young. Elon lived primarily with his father — a relationship that was complex and often difficult. At school he faced relentless bullying. One attack left him so badly beaten that he was hospitalized for a week. The physical pain faded; the emotional scars remained. Yet instead of breaking, the boy turned inward and upward — into code, rockets, and the stars.</p>
+        <p>At age twelve, Elon taught himself to program on a Commodore VIC-20. He wrote a simple space-themed video game called <em>Blastar</em> and sold the source code to a computer magazine for $500. It was a small sum, but it proved something fundamental: ideas could become products, and products could create freedom.</p>
+        <div class="highlight">
+          <strong>Key moment:</strong> At 12 years old, Elon sold his first creation. The same boy who was beaten in the schoolyard had already begun building the future.
+        </div>
+        <p>By his late teens, South Africa under apartheid offered limited horizons and the certainty of military conscription. Elon wanted none of it. He wanted the largest possible canvas — the United States — and the emerging internet. In 1989, using his mother’s Canadian citizenship, the seventeen-year-old left South Africa alone with a few thousand dollars and a one-way ticket toward the unknown.</p>
+      </div>
+    </article>
+
+    <!-- CHAPTER 2 -->
+    <article class="chapter" id="ch2">
+      <header class="chapter-header">
+        <div class="chapter-num">Chapter 02</div>
+        <h2 class="chapter-title">Escape Velocity</h2>
+        <div class="chapter-years">Canada &amp; the United States · 1989–1995</div>
+      </header>
+      <div class="chapter-body">
+        <p>Elon arrived in Canada with almost nothing. He worked odd jobs — cleaning boilers, cutting logs, farming — while searching for relatives he had never met. In 1990 he enrolled at Queen’s University in Kingston, Ontario. Two years later he transferred to the University of Pennsylvania, where he earned dual bachelor’s degrees: one in physics and one in economics from the Wharton School.</p>
+        <p>He was already thinking far beyond graduation. In a senior paper titled “The Importance of Being Solar,” he explored sustainable energy. He read voraciously about space, the internet, and the limits of human civilization. After finishing at Penn, he was accepted into a PhD program in materials science at Stanford University. He stayed for two days.</p>
+        <p>The year was 1995. The World Wide Web was exploding. Elon decided that the internet would change society faster than any physics research. He walked away from the doctorate, moved into a tiny office in Silicon Valley with his brother Kimbal, and prepared to build.</p>
+        <div class="highlight">
+          <strong>Turning point:</strong> Leaving Stanford after 48 hours. Most people would call it quitting. Elon called it prioritizing the highest-leverage problem of the decade.
+        </div>
+      </div>
+    </article>
+
+    <!-- CHAPTER 3 -->
+    <article class="chapter" id="ch3">
+      <header class="chapter-header">
+        <div class="chapter-num">Chapter 03</div>
+        <h2 class="chapter-title">Zip2 — The First Empire</h2>
+        <div class="chapter-years">Palo Alto · 1995–1999</div>
+      </header>
+      <div class="chapter-body">
+        <p>In 1995, Elon, Kimbal, and a friend founded Zip2 — a company that provided online city guides, maps, and business directories for newspapers. At a time when most media companies still treated the internet as a curiosity, Zip2 gave them a digital presence. Major clients included The New York Times and the Chicago Tribune.</p>
+        <p>The brothers worked brutal hours. Elon coded through the night and slept on the office floor. Money was tight; they showered at the local YMCA. Venture capital eventually arrived, but with it came pressure and boardroom politics. Elon fought to keep control of the vision even as professional managers were brought in.</p>
+        <p>In 1999, Compaq Computer acquired Zip2 for approximately $307 million in cash. Elon’s share made him a multimillionaire at age 28. Most people would have retired or slowed down. Elon did the opposite. He took the capital and immediately started the next company.</p>
+        <div class="highlight">
+          <strong>Lesson:</strong> The first exit was not the end of the story. It was the fuel for everything that followed.
+        </div>
+      </div>
+    </article>
+
+    <!-- CHAPTER 4 -->
+    <article class="chapter" id="ch4">
+      <header class="chapter-header">
+        <div class="chapter-num">Chapter 04</div>
+        <h2 class="chapter-title">X.com to PayPal</h2>
+        <div class="chapter-years">1999–2002</div>
+      </header>
+      <div class="chapter-body">
+        <p>With roughly $10–12 million of his Zip2 proceeds, Elon founded X.com in March 1999 — an ambitious online bank and financial services platform. The vision was radical: money should move as easily as email. The company grew quickly but faced fierce competition from a startup called Confinity, which had built a popular person-to-person payment tool named PayPal.</p>
+        <p>In March 2000 the two companies merged. The combined entity eventually adopted the name PayPal. Elon served as CEO, but internal conflicts over product direction and leadership style led to a boardroom coup in September 2000. He was replaced as CEO, though he remained the largest shareholder.</p>
+        <p>PayPal went public in early 2002 and was acquired by eBay later that year for $1.5 billion in stock. Elon’s personal stake was worth approximately $165–180 million after taxes. At 31 years old, he now had the capital and the freedom to attack problems that no one else was willing to touch.</p>
+        <div class="highlight">
+          <strong>The real prize:</strong> Not the money — the proof that a small team c
