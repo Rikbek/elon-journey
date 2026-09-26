@@ -433,7 +433,7 @@
       background: var(--accent-soft);
     }
 
-    .toc a::before {
+    .toc ol a::before {
       content: counter(toc, decimal-leading-zero);
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.8rem;
@@ -450,6 +450,31 @@
     .toc-years {
       font-size: 0.8rem;
       color: var(--text-muted);
+    }
+
+    .start-reading-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #0a0a0f !important;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 0.9rem 1.75rem;
+      border-radius: 10px;
+      text-decoration: none !important;
+      box-shadow: 0 4px 24px rgba(201, 162, 39, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .start-reading-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(201, 162, 39, 0.55);
+      background: #d4b02e;
+    }
+
+    .start-reading-btn::before {
+      content: none !important;
     }
 
     /* ===== FOOTER ===== */
@@ -587,7 +612,7 @@
         <li><a href="#ch10"><span class="toc-title">Trillionaire &amp; Beyond</span><span class="toc-years">2025–Present</span></a></li>
       </ol>
       <div style="margin-top: 1.75rem; text-align: center;">
-        <a href="#ch1" class="nav-btn next-btn" onclick="showSection('ch1'); return false;" style="display:inline-block;">Start Reading → Chapter 1</a>
+        <a href="#ch1" class="start-reading-btn" onclick="showSection('ch1'); return false;">Start Reading → Chapter 1</a>
       </div>
     </section>
 
