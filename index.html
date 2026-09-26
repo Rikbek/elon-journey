@@ -251,16 +251,94 @@
     .book {
       max-width: 720px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 6rem;
+      padding: 2rem 1.5rem 4rem;
+      min-height: 50vh;
     }
 
     .chapter {
-      margin-bottom: 5rem;
+      display: none;
       scroll-margin-top: 4.5rem;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .chapter.active {
+      display: block;
+    }
+
+    .toc {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .toc.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chapter-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .chapter-nav button,
+    .chapter-nav a.nav-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.65rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .chapter-nav button:hover:not(:disabled),
+    .chapter-nav a.nav-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .chapter-nav button:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .chapter-nav .next-btn {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .chapter-nav .next-btn:hover:not(:disabled) {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .chapter-progress {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-align: center;
+      flex: 1;
     }
 
     .chapter-header {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       padding-bottom: 1.25rem;
       border-bottom: 1px solid var(--border);
     }
@@ -522,12 +600,13 @@
       </div>
       <div class="chapter-body">
         <p>Elon Reeve Musk was born on June 28, 1971, in Pretoria, South Africa, to Maye Musk — a Canadian-born model and dietitian — and Errol Musk, a South African electromechanical engineer and property developer. From the earliest years, he was different. While other children played outside, Elon disappeared into books and daydreams. He would later describe himself as a quiet, intense child who preferred the company of encyclopedias and science-fiction novels.</p>
-        <p>His parents divorced when he was young. Elon lived primarily with his father — a relationship that was complex and often difficult. At school he faced relentless bullying. One attack left him so badly beaten that he was hospitalized for a week. The physical pain faded; the emotional scars remained. Yet instead of breaking, the boy turned inward and upward — into code, rockets, and the stars.</p>
-        <p>At age twelve, Elon taught himself to program on a Commodore VIC-20. He wrote a simple space-themed video game called <em>Blastar</em> and sold the source code to a computer magazine for $500. It was a small sum, but it proved something fundamental: ideas could become products, and products could create freedom.</p>
+        <p>His parents divorced when he was still young. Elon spent much of his childhood living with his father — a relationship that was complex, demanding, and often painful. At school the bullying was relentless. One attack left him so badly beaten that he was hospitalized for a week. The physical injuries healed; the emotional ones stayed. Yet instead of breaking, the boy turned inward and upward — into code, rockets, and the stars.</p>
+        <p>He read constantly. Science fiction by Isaac Asimov and Robert Heinlein filled his imagination with multi-planetary futures. Technical manuals and computer magazines filled his hands. At age ten he got his first computer. By twelve he had taught himself to program on a Commodore VIC-20 and written a simple space-themed video game called <em>Blastar</em>. He sold the source code to a South African computer magazine for $500. It was a small sum, but it proved something fundamental: ideas could become products, and products could create freedom.</p>
+        <p>School remained difficult. He was bright but socially awkward, often lost in thought. Friends were few. The world around him — apartheid South Africa — felt limited and oppressive. Mandatory military service loomed. Elon saw no future in staying. He wanted the largest possible canvas: the United States, the internet, and the frontier of technology.</p>
         <div class="highlight">
           <strong>Key moment:</strong> At 12 years old, Elon sold his first creation. The same boy who was beaten in the schoolyard had already begun building the future.
         </div>
-        <p>By his late teens, South Africa under apartheid offered limited horizons and the certainty of military conscription. Elon wanted none of it. He wanted the largest possible canvas — the United States — and the emerging internet. In 1989, using his mother’s Canadian citizenship, the seventeen-year-old left South Africa alone with a few thousand dollars and a one-way ticket toward the unknown.</p>
+        <p>In 1989, using his mother’s Canadian citizenship, the seventeen-year-old left South Africa alone. He carried a few thousand dollars and a one-way ticket. Behind him was a childhood of books, code, and quiet determination. Ahead of him was everything else.</p>
       </div>
     </article>
 
@@ -542,12 +621,14 @@
         <img src="chapter%202.png" alt="Chapter 2" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>Elon arrived in Canada with almost nothing. He worked odd jobs — cleaning boilers, cutting logs, farming — while searching for relatives he had never met. In 1990 he enrolled at Queen’s University in Kingston, Ontario. Two years later he transferred to the University of Pennsylvania, where he earned dual bachelor’s degrees: one in physics and one in economics from the Wharton School.</p>
-        <p>He was already thinking far beyond graduation. In a senior paper titled “The Importance of Being Solar,” he explored sustainable energy. He read voraciously about space, the internet, and the limits of human civilization. After finishing at Penn, he was accepted into a PhD program in materials science at Stanford University. He stayed for two days.</p>
-        <p>The year was 1995. The World Wide Web was exploding. Elon decided that the internet would change society faster than any physics research. He walked away from the doctorate, moved into a tiny office in Silicon Valley with his brother Kimbal, and prepared to build.</p>
+        <p>Elon arrived in Canada with almost nothing. He worked odd jobs — cleaning boilers, cutting logs at a lumber mill, working on farms — while searching for relatives he had never met. The early months were hard and lonely. He had left home for opportunity, not comfort.</p>
+        <p>In 1990 he enrolled at Queen’s University in Kingston, Ontario. He studied hard and began forming the first real friendships of his adult life. Two years later he transferred to the University of Pennsylvania. There he earned dual bachelor’s degrees: one in physics and one in economics from the Wharton School. The combination mattered. Physics taught him how the universe worked. Economics taught him how resources and incentives moved the world.</p>
+        <p>Even as a student he was thinking far beyond graduation. In a senior paper titled “The Importance of Being Solar,” he explored sustainable energy long before it became mainstream. He read voraciously about space travel, the internet, and the long-term survival of human civilization. After finishing at Penn, he was accepted into a PhD program in materials science at Stanford University in California. He stayed for two days.</p>
+        <p>The year was 1995. The World Wide Web was exploding. Elon decided that the internet would change society faster than any physics research he could do in a lab. He walked away from the doctorate, moved into a tiny office in Silicon Valley with his brother Kimbal, and prepared to build.</p>
         <div class="highlight">
           <strong>Turning point:</strong> Leaving Stanford after 48 hours. Most people would call it quitting. Elon called it prioritizing the highest-leverage problem of the decade.
         </div>
+        <p>He had crossed oceans, collected degrees, and abandoned a prestigious academic path. Now the real work began — turning ideas into companies that could move the world.</p>
       </div>
     </article>
 
@@ -562,12 +643,14 @@
         <img src="chapter%203.png" alt="Chapter 3" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>In 1995, Elon, Kimbal, and a friend founded Zip2 — a company that provided online city guides, maps, and business directories for newspapers. At a time when most media companies still treated the internet as a curiosity, Zip2 gave them a digital presence. Major clients included The New York Times and the Chicago Tribune.</p>
-        <p>The brothers worked brutal hours. Elon coded through the night and slept on the office floor. Money was tight; they showered at the local YMCA. Venture capital eventually arrived, but with it came pressure and boardroom politics. Elon fought to keep control of the vision even as professional managers were brought in.</p>
-        <p>In 1999, Compaq Computer acquired Zip2 for approximately $307 million in cash. Elon’s share made him a multimillionaire at age 28. Most people would have retired or slowed down. Elon did the opposite. He took the capital and immediately started the next company.</p>
+        <p>In 1995, Elon, his brother Kimbal, and a friend named Greg Kouri founded Zip2 — a company that provided online city guides, maps, and business directories for newspapers. At a time when most media companies still treated the internet as a curiosity, Zip2 gave them a real digital presence. Major clients eventually included The New York Times and the Chicago Tribune.</p>
+        <p>The early days were extreme. Elon coded through the night and often slept on the office floor. Money was tight; the brothers showered at the local YMCA and lived on almost nothing. They believed the internet would transform how people found information, and they wanted to be early.</p>
+        <p>Venture capital eventually arrived. With money came pressure and boardroom politics. Professional managers were brought in. Elon fought hard to keep control of the product vision even as the company grew beyond its founders. The tension was real, but the product worked.</p>
+        <p>In 1999, Compaq Computer acquired Zip2 for approximately $307 million in cash. Elon’s share made him a multimillionaire at age 28. Most people would have retired, bought a house, or slowed down. Elon did the opposite. He took the capital and immediately started the next company.</p>
         <div class="highlight">
           <strong>Lesson:</strong> The first exit was not the end of the story. It was the fuel for everything that followed.
         </div>
+        <p>Zip2 had proven he could build and sell. Now he wanted to rebuild something much bigger — the way money itself moved online.</p>
       </div>
     </article>
 
@@ -582,12 +665,14 @@
         <img src="chapter%204.png" alt="Chapter 4" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>With roughly $10–12 million of his Zip2 proceeds, Elon founded X.com in March 1999 — an ambitious online bank and financial services platform. The vision was radical: money should move as easily as email. The company grew quickly but faced fierce competition from a startup called Confinity, which had built a popular person-to-person payment tool named PayPal.</p>
-        <p>In March 2000 the two companies merged. The combined entity eventually adopted the name PayPal. Elon served as CEO, but internal conflicts over product direction and leadership style led to a boardroom coup in September 2000. He was replaced as CEO, though he remained the largest shareholder.</p>
-        <p>PayPal went public in early 2002 and was acquired by eBay later that year for $1.5 billion in stock. Elon’s personal stake was worth approximately $165–180 million after taxes. At 31 years old, he now had the capital and the freedom to attack problems that no one else was willing to touch.</p>
+        <p>With roughly $10–12 million of his Zip2 proceeds, Elon founded X.com in March 1999 — an ambitious online bank and financial services platform. The vision was radical for its time: money should move as easily as email. No branches. No paperwork. Just the internet.</p>
+        <p>The company grew quickly but faced fierce competition from a startup called Confinity, which had built a popular person-to-person payment tool named PayPal. In March 2000 the two companies merged. The combined entity eventually adopted the name PayPal. Elon served as CEO, pushing hard for rapid growth and a bold product roadmap.</p>
+        <p>Internal conflicts over product direction and leadership style led to a boardroom coup in September 2000. Elon was replaced as CEO, though he remained the largest shareholder. It was a painful moment — losing control of the company he had helped create. Yet he stayed invested and continued to believe in the mission.</p>
+        <p>PayPal went public in early 2002 and was acquired by eBay later that year for $1.5 billion in stock. Elon’s personal stake was worth approximately $165–180 million after taxes. At 31 years old, he now had the capital and the freedom to attack problems that almost no one else was willing to touch.</p>
         <div class="highlight">
           <strong>The real prize:</strong> Not the money — the proof that a small team could rewrite an entire industry, and the war chest to fund the next impossible missions.
         </div>
+        <p>He could have stopped there. Instead, he looked at the hardest problems still unsolved: electric cars and space travel. Both were considered commercial suicide. Both became his next chapters.</p>
       </div>
     </article>
 
@@ -602,12 +687,13 @@
         <img src="chapter%205.png" alt="Chapter 5" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>In May 2002, Elon founded Space Exploration Technologies — SpaceX — with a single, almost absurd goal: reduce the cost of space travel by orders of magnitude and ultimately make life multi-planetary. He invested roughly $100 million of his own money. The aerospace establishment laughed. Rockets were the domain of governments and giant contractors. A private company building orbital rockets from scratch was considered fantasy.</p>
-        <p>The early years were brutal. The first three Falcon 1 launches failed. By 2008, SpaceX was nearly out of cash. Tesla was also on the brink of collapse. Elon was sleeping on friends’ couches and pouring every remaining dollar into both companies. One more failure would end everything.</p>
-        <p>On September 28, 2008, the fourth Falcon 1 launch succeeded. It became the first privately developed liquid-fueled rocket to reach orbit. Days later, NASA awarded SpaceX a $1.6 billion contract to resupply the International Space Station. The company that almost died was suddenly the future of American spaceflight.</p>
+        <p>In May 2002, Elon founded Space Exploration Technologies — SpaceX — with a single, almost absurd goal: reduce the cost of space travel by orders of magnitude and ultimately make life multi-planetary. He invested roughly $100 million of his own PayPal money. The aerospace establishment largely dismissed the idea. Rockets were the domain of governments and giant contractors. A private company building orbital rockets from scratch was considered fantasy.</p>
+        <p>The early years were brutal. The first three Falcon 1 launches failed — in 2006, 2007, and again in 2008. By the third failure, SpaceX was nearly out of cash. Tesla was also on the brink of collapse at the same time. Elon was pouring every remaining dollar into both companies, sleeping on friends’ couches, and facing the real possibility of total failure. One more unsuccessful launch would end everything.</p>
+        <p>On September 28, 2008, the fourth Falcon 1 launch succeeded. It became the first privately developed liquid-fueled rocket to reach Earth orbit. Days later, NASA awarded SpaceX a $1.6 billion contract to resupply the International Space Station. The company that almost died was suddenly the future of American spaceflight.</p>
         <div class="highlight">
           <strong>Near-death experience:</strong> 2008. Three failed launches. Zero money left. One successful flight. Everything changed.
         </div>
+        <p>SpaceX had survived its hardest test. The next decade would turn survival into dominance — but first, another impossible company needed saving.</p>
       </div>
     </article>
 
@@ -622,12 +708,14 @@
         <img src="chapter%206.png" alt="Chapter 6" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>In 2004, Elon invested in Tesla Motors, an electric-car startup founded by Martin Eberhard and Marc Tarpenning. He became chairman of the board and the largest shareholder. By 2008, as the company struggled to deliver its first vehicle, the original founders left and Elon took over as CEO — a role he never planned to hold permanently, yet one he has never left.</p>
-        <p>The Tesla Roadster shipped in 2008, proving that an electric car could be fast, beautiful, and desirable. In 2010 Tesla went public — the first American car company to do so since Ford in 1956. The Model S followed in 2012 and redefined what a premium sedan could be. Suddenly the entire automotive industry had to respond.</p>
-        <p>Elon was now running two companies that the world had written off as impossible. Both were still fragile. Both demanded everything he had. He later said that 2008 nearly killed him — financially, emotionally, and physically. He survived. Tesla and SpaceX survived with him.</p>
+        <p>In 2004, Elon invested in Tesla Motors, an electric-car startup founded by Martin Eberhard and Marc Tarpenning. He became chairman of the board and the largest shareholder. The mission was clear: prove that electric vehicles could be better than gasoline cars — faster, more desirable, and eventually affordable for the mass market.</p>
+        <p>By 2008, as the company struggled to deliver its first vehicle, the original founders left and Elon took over as CEO — a role he never planned to hold permanently, yet one he has never left. The same year, the Tesla Roadster finally shipped. It proved that an electric car could be fast, beautiful, and exciting. Critics who said EVs were golf carts had to reconsider.</p>
+        <p>In 2010 Tesla went public — the first American car company to do so since Ford in 1956. The Model S followed in 2012 and redefined what a premium sedan could be. Suddenly the entire automotive industry had to respond. Legacy carmakers began announcing their own electric plans.</p>
+        <p>Throughout this period Elon was running two companies the world had written off as impossible. Both were still fragile. Both demanded everything he had. He later said that 2008 nearly killed him — financially, emotionally, and physically. He survived. Tesla and SpaceX survived with him.</p>
         <div class="highlight">
           <strong>Parallel wars:</strong> While SpaceX fought to reach orbit, Tesla fought to prove that electric cars belonged on the road. Elon fought both battles at the same time.
         </div>
+        <p>The foundation was set. The next phase would be about scaling — making rockets reusable and electric cars mainstream.</p>
       </div>
     </article>
 
@@ -642,12 +730,13 @@
         <img src="chapter%207.png" alt="Chapter 7" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>In 2012, SpaceX’s Dragon capsule became the first commercial spacecraft to dock with the International Space Station. The same year, Tesla launched the Model S to critical and commercial success. Momentum was building, but the real breakthrough was still ahead.</p>
-        <p>In December 2015, a Falcon 9 first stage landed vertically back on Earth — something no one had ever done with an orbital-class rocket. Reusability was no longer a theory. It was operational. Launch costs began to collapse. Starlink, a constellation of internet satellites, was conceived. Falcon Heavy flew in 2018, carrying Elon’s own Tesla Roadster toward Mars as a playful payload.</p>
-        <p>Meanwhile, Elon co-founded Neuralink (brain-machine interfaces), The Boring Company (tunnels), and OpenAI (initially as a non-profit AI research lab). He also pushed Tesla into solar energy through the acquisition of SolarCity and the development of Solar Roof and Powerwall. The portfolio was expanding faster than almost anyone could track.</p>
+        <p>In 2012, SpaceX’s Dragon capsule became the first commercial spacecraft to dock with the International Space Station. The same year, Tesla’s Model S launched to critical and commercial success. Momentum was building, but the real breakthrough was still ahead.</p>
+        <p>In December 2015, a Falcon 9 first stage landed vertically back on Earth — something no one had ever done with an orbital-class rocket. Reusability was no longer a theory. It was operational reality. Launch costs began to collapse. The economics of space changed overnight. Starlink, a constellation of internet satellites designed to connect the entire planet, was conceived. In 2018 Falcon Heavy flew, carrying Elon’s own Tesla Roadster as a playful payload on a trajectory toward Mars.</p>
+        <p>Meanwhile the portfolio expanded. Elon co-founded Neuralink to develop brain-machine interfaces, The Boring Company to dig tunnels and reduce traffic, and OpenAI (initially as a non-profit AI research lab). Through Tesla he pushed into solar energy with the acquisition of SolarCity and the development of Solar Roof and Powerwall. Energy, transport, space, and AI were no longer separate industries in his mind — they were parts of one larger mission.</p>
         <div class="highlight">
           <strong>2015:</strong> The year a rocket came home. Reusability turned science fiction into engineering reality.
         </div>
+        <p>The foundation of the next decade was now in place: reusable rockets, mass-market electric cars, and the early seeds of satellite internet and human-AI interfaces.</p>
       </div>
     </article>
 
@@ -662,12 +751,13 @@
         <img src="chapter%208.png" alt="Chapter 8" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>The Model 3 production ramp nearly broke Tesla again. Elon slept on the factory floor during “production hell.” Critics predicted bankruptcy weekly. Instead, Tesla scaled manufacturing at a rate the industry had never seen, opened Gigafactories, and made the Model 3 and later the Model Y the best-selling vehicles in their classes.</p>
-        <p>SpaceX continued its ascent. Crew Dragon carried NASA astronauts to the ISS in 2020 — the first crewed orbital launch from American soil since the Space Shuttle. Starlink began beaming internet to remote regions and conflict zones. Starship, the fully reusable next-generation vehicle, took shape in Texas.</p>
-        <p>By 2021 Elon had become the richest person in the world. The same year he hosted <em>Saturday Night Live</em> and openly discussed having Asperger’s. The public persona grew larger, more polarizing, and more impossible to ignore. In 2022 he turned his attention to a new frontier: the global public square known as Twitter.</p>
+        <p>The Model 3 production ramp nearly broke Tesla again. Elon slept on the factory floor during what he called “production hell.” Critics predicted bankruptcy on a weekly basis. Instead of collapsing, Tesla scaled manufacturing at a rate the industry had never seen. Gigafactories opened. The Model 3 and later the Model Y became best-selling vehicles in their classes around the world.</p>
+        <p>SpaceX continued its ascent. In 2020, Crew Dragon carried NASA astronauts to the International Space Station — the first crewed orbital launch from American soil since the Space Shuttle retired. Starlink began beaming high-speed internet to remote regions, ships at sea, and conflict zones. In Texas, Starship — the fully reusable next-generation vehicle designed to carry humans to Mars — took shape under intense public scrutiny.</p>
+        <p>By 2021 Elon had become the richest person in the world on paper. The same year he hosted <em>Saturday Night Live</em> and openly discussed having Asperger’s syndrome. His public persona grew larger, more polarizing, and more impossible to ignore. In 2022 he turned his attention to a new frontier: the global public square known as Twitter.</p>
         <div class="highlight">
           <strong>Production hell to dominance:</strong> The same man who almost lost everything in 2008 was now the most valuable carmaker on Earth and the primary launch provider for NASA.
         </div>
+        <p>The companies had scaled. The next battles would be fought in social media, artificial intelligence, and the race to make humanity multi-planetary.</p>
       </div>
     </article>
 
@@ -682,12 +772,13 @@
         <img src="chapter%209.png" alt="Chapter 9" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>In October 2022, Elon completed the $44 billion acquisition of Twitter. He immediately began restructuring the company, restoring previously banned accounts, and pushing for free-speech principles. In 2023 the platform was rebranded as X — a return to the original vision of an “everything app” that he had first imagined with X.com decades earlier.</p>
-        <p>The same year he founded xAI, an artificial-intelligence company with the stated mission of understanding the true nature of the universe. Grok, xAI’s conversational AI, launched with a deliberately less “politically correct” personality than its competitors. Neuralink achieved its first human implant. Starship continued high-altitude tests. Optimus, Tesla’s humanoid robot, took its first steps in public.</p>
-        <p>Elon’s influence now stretched across electric vehicles, reusable rocketry, satellite internet, social media, brain interfaces, and frontier AI. Critics called him chaotic. Supporters called him the most effective builder of the century. Both sides agreed on one thing: the scale was unprecedented.</p>
+        <p>In October 2022, Elon completed the $44 billion acquisition of Twitter. He immediately began restructuring the company, cutting costs, restoring previously banned accounts, and pushing hard for free-speech principles. The move was controversial from day one. Supporters saw a defense of open discourse. Critics saw chaos. Either way, the platform would never be the same.</p>
+        <p>In 2023 the platform was rebranded as X — a deliberate return to the original vision of an “everything app” that Elon had first imagined with X.com decades earlier. Payments, content, communication, and eventually more services were meant to live under one roof. The same year he founded xAI, an artificial-intelligence company with the stated mission of understanding the true nature of the universe. Grok, xAI’s conversational AI, launched with a deliberately less filtered personality than its competitors.</p>
+        <p>Progress continued across the rest of the portfolio. Neuralink achieved its first human implant. Starship continued high-altitude flight tests in Texas. Optimus, Tesla’s humanoid robot, took its first public steps. Starlink kept expanding coverage. The scale of simultaneous projects was unlike anything most executives would attempt in a lifetime.</p>
         <div class="highlight">
           <strong>Full circle:</strong> The domain X.com that Elon had bought years earlier finally became the name of a global communications platform.
         </div>
+        <p>By the end of 2024, Elon’s influence stretched across electric vehicles, reusable rocketry, satellite internet, social media, brain interfaces, and frontier AI. Critics called him chaotic. Supporters called him the most effective builder of the century. Both sides agreed on one thing: the scale was unprecedented.</p>
       </div>
     </article>
 
@@ -702,13 +793,13 @@
         <img src="chapter%2010.png" alt="Chapter 10" style="width: 100%; display: block; height: auto;" />
       </div>
       <div class="chapter-body">
-        <p>In early 2025, Elon briefly served as a senior advisor focused on government efficiency. Later that year Tesla shareholders approved a historic compensation package tied to extraordinary market-capitalization and operational milestones. SpaceX continued to dominate launch cadence and Starlink subscribers. xAI scaled its compute cluster and models at remarkable speed.</p>
-        <p>In February 2026, SpaceX announced the acquisition of xAI in an all-stock deal, bringing rockets, satellites, and advanced AI under one roof. In June 2026, SpaceX completed the largest IPO in history. When shares began trading, Elon Musk’s net worth crossed the $1 trillion threshold — making him the first person in recorded history to reach that mark.</p>
-        <p>The boy who coded <em>Blastar</em> in Pretoria, who left South Africa with a few thousand dollars, who nearly went bankrupt in 2008 while fighting for two companies the world dismissed, had rewritten the limits of what one human life could contain. The stated goals remain unchanged: sustainable energy on Earth, a self-sustaining city on Mars, and a deeper understanding of the universe through AI.</p>
+        <p>In early 2025, Elon briefly served as a senior advisor focused on government efficiency. Later that year Tesla shareholders approved a historic compensation package tied to extraordinary market-capitalization and operational milestones. SpaceX continued to dominate global launch cadence and Starlink subscriber growth. xAI scaled its compute clusters and models at remarkable speed.</p>
+        <p>In February 2026, SpaceX announced the acquisition of xAI in an all-stock deal, bringing rockets, satellites, and advanced AI under one corporate roof. In June 2026, SpaceX completed the largest IPO in history. When shares began trading, Elon Musk’s net worth crossed the $1 trillion threshold — making him the first person in recorded history to reach that mark.</p>
+        <p>The arc was almost unbelievable when viewed from the beginning. The boy who coded <em>Blastar</em> in Pretoria, who left South Africa with a few thousand dollars, who nearly went bankrupt in 2008 while fighting for two companies the world had dismissed, had rewritten the practical limits of what one human life could contain. The stated goals, however, remained the same as they had been for years: sustainable energy on Earth, a self-sustaining city on Mars, and a deeper understanding of the universe through artificial intelligence.</p>
         <div class="highlight">
           <strong>The story is not finished.</strong> Every chapter so far has been a prelude. The next ones will be written in orbit, on the surface of Mars, and in the minds of the generation that grew up watching him refuse to accept the status quo.
         </div>
-        <p>This digital book exists so that story can travel farther than any single biography. May it reach Gen Z and every generation that follows — not as worship, but as proof that audacious goals, extreme work ethic, and the refusal to quit can still move civilization forward.</p>
+        <p>This digital book exists so that story can travel farther than any single biography. May it reach Gen Z and every generation that follows — not as worship, but as proof that audacious goals, extreme work ethic, and the refusal to quit can still move civilization forward. The journey continues.</p>
       </div>
     </article>
 
